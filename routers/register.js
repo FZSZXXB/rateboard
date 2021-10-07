@@ -35,6 +35,7 @@ router.post('/register', function (req, res) {
     try {
         res.setHeader('Content-Type', 'application/json');
         let userInfo = req.body;
+        if (userInfo.username == '' || userInfo.password == '') res.send(JSON.stringify({ error_code: 1001 }));
         let encryption = crypto.createHmac('sha256', 'jie').update(userInfo.password).digest('hex');
         connection.query(`INSERT into user(username,password) VALUES("${userInfo.username}","${encryption}")`, function (error, results, fields) {
             if (error) res.send(JSON.stringify({ error_code: 1001 }));
