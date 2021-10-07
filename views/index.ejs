@@ -201,7 +201,7 @@
               </div>
               <div class="field">
                 <label>时间</label>
-                <input type="text" id="time<%= contest.id %>" value="<%= web_util.formatDate(contest.start_time || web_util.getCurrentDate()) %>">
+                <input type="text" id="time<%= contest.id %>" value="<%= web_util.formatDate(contest.time || web_util.getCurrentDate()) %>">
               </div>
               <div class="field">
                 <label>比赛排名（格式：从高到低:班级 姓名 详情 备注一行一个）</label>

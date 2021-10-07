@@ -61,6 +61,8 @@ module.exports = function (app) {
             let id = parseInt(req.params.id);
             connection.query(`SELECT * FROM contest WHERE id = ${id}`, function (error, results, fields) {
                 if (error)
+                    res.render('rank', { error_code: 4003 });
+                else if (results.length === 0)
                     res.render('rank', { error_code: 4001 });
                 else {
                     let str = results[0].rating;
