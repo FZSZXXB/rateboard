@@ -72,6 +72,8 @@ module.exports = function (app) {
                     else {
                         let detail = [];
                         for (let i = 0; i < arr.length; ++i) {
+                            if (arr[i].length < 1)
+                                res.render('rank', { error_code: 4002 });
                             detail[i] = arr[i].split(' ') || [];
                             if (detail[i].length < 3)
                                 res.render('rank', { error_code: 4002 });
