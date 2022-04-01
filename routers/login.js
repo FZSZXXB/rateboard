@@ -20,6 +20,8 @@ router.get('/',checklogout, function (req, res) {
 router.post('/login', function (req, res) {
     try {
         res.setHeader('Content-Type', 'application/json');
+		let reg = new RegExp('[^a-zA-Z0-9]+');
+		if (reg.test(req.body.username)) throw 2001;
         let encryption = crypto.createHmac('sha256', 'jie').update(req.body.password).digest('hex');
         connection.query(`select * from user where username = "${req.body.username}" and password = "${encryption}"`, function (error, results, fields) {
             if (error) throw 2001;
@@ -35,8 +37,8 @@ router.post('/login', function (req, res) {
             }
         })
     } catch (e) {
-        syzoj.log(e);
-        res.send(JSON.stringify({ error_code: 2002 }));
+        console.log(e);
+        res.send(JSON.stringify({ error_code: e }));
     }
 })
 //退出登录
